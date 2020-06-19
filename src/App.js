@@ -1,8 +1,13 @@
 import React from 'react';
 import './App.css';
+import ListItems from './ListItems' 
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faTrash);
 
 class App extends React.Component{
-\  constructor(props){
+  constructor(props){
     super(props);
     this.state={
       items:[],
@@ -25,10 +30,16 @@ class App extends React.Component{
   addItem(e){
     e.preventDefault();
     const newItem = this.state.currentItem;
-    console.log(newItem);
-    if(newItem.text!==""{
-      const items=[...this.state.items, newItems];
-    })
+    if(newItem.text!==""){
+      const newItems=[...this.state.items, newItem];
+      this.setState({
+        items:newItems,
+        currentItem:{
+          text:'',
+          key:''
+        }
+      })
+    }
   }
   render(){
     return(
@@ -39,6 +50,9 @@ class App extends React.Component{
             <button type="submit">Add</button>
           </form>
       </header>
+      <ListItems items= {this.state.items}>
+
+      </ListItems>
      </div>
     );
   }
